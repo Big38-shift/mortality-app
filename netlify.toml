@@ -1,0 +1,20 @@
+[build]
+command = "npm run build"
+publish = "mortality_frontend/dist"
+
+[env]
+[env.production]
+variables = { VITE_API_URL = "https://mortality-app.onrender.com" }
+
+[env.development]
+variables = { VITE_API_URL = "http://localhost:8000" }
+
+[[redirects]]
+from = "/api/*"
+to = "https://mortality-app.onrender.com/api/:splat"
+status = 200
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
