@@ -1,6 +1,7 @@
 [build]
+base = "mortality_frontend"
 command = "npm run build"
-publish = "mortality_frontend/dist"
+publish = "dist"
 
 [env]
 [env.production]
