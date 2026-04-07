@@ -1,0 +1,38 @@
+services:
+  # Backend API Service
+  - type: web
+    name: mortality-predictor-api
+    env: python
+    plan: free
+    buildCommand: pip install -r mortality_backend/requirements.txt
+    startCommand: |
+      cd mortality_backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    
+    # Environment variables
+    envVars:
+      - key: DATABASE_URL
+        scope: build,runtime
+        sync: false
+      - key: SECRET_KEY
+        scope: build,runtime
+        sync: false
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "30"
+
+  # Frontend Service
+  - type: static
+    name: mortality-predictor-frontend
+    buildCommand: cd mortality_frontend && npm install && npm run build
+    staticPublishPath: ./mortality_frontend/dist
+    routes:
+      - path: /*
+        destination: /index.html
+
+# Connects services
+connect:
+  - service: mortality-predictor-frontend
+    target: mortality-predictor-api
+    environment:
+      VITE_API_URL: https://mortality-predictor-api.onrender.com

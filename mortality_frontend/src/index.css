@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-[#f8f9fa] text-slate-900 antialiased;
+  }
+}
+
+/* Custom range input styling */
+input[type='range'] {
+  @apply cursor-pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  @apply w-4 h-4 bg-white border-2 border-[#1a237e] rounded-full appearance-none shadow-md transition-transform hover:scale-110;
+}
+
+input[type='range']::-moz-range-thumb {
+  @apply w-4 h-4 bg-white border-2 border-[#1a237e] rounded-full shadow-md transition-transform hover:scale-110;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
+}
+
+/* Table row highlighting */
+tr.bg-red-50\/20:hover {
+  @apply bg-red-50/40;
+}
+
+tr.bg-emerald-50\/20:hover {
+  @apply bg-emerald-50/40;
+}
